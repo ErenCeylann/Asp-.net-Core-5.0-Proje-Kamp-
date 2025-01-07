@@ -1,0 +1,76 @@
+﻿@model EntityLayer.Concrete.Porfolio
+@{
+    ViewData["Title"] = "EditPortfolio";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("EditPortfolio", "Portfolio", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(Model=>Model.Name,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Name,new {@class="form-control"})
+        @Html.ValidationMessageFor(x=>x.Name,"",new {@class="text-danger"})
+
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.ImageUrl,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.ImageUrl,new {@class="form-control"})
+        @Html.ValidationMessageFor(x=>x.ImageUrl,"",new {@class="text-danger"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.ImageUrl2,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.ImageUrl2,new {@class="form-control"})
+        @Html.ValidationMessageFor(x=>x.ImageUrl2,"",new {@class="text-danger"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.ProjectUrl,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.ProjectUrl,new {@class="form-control"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.Image1,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Image1,new {@class="form-control"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.Image2,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Image2,new {@class="form-control"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.Image3,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Image3,new {@class="form-control"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.Image4,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Image4,new {@class="form-control"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.Platform,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Platform,new {@class="form-control"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.Price,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Price,new {@class="form-control"})
+        @Html.ValidationMessageFor(x=>x.Price,"",new {@class="text-danger"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.Value,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Value,new {@class="form-control"})
+        @Html.ValidationMessageFor(x=>x.Value,"",new {@class="text-danger"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.Status,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Status,new {@class="form-control"})
+    </div>
+    <button class="btn btn-primary">Kaydet</button>
+}
+

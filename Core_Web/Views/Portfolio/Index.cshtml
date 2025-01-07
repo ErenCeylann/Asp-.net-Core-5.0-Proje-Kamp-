@@ -1,0 +1,97 @@
+﻿@using EntityLayer.Concrete
+@model List<Porfolio>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col">
+        <div class="card bg-default shadow">
+            <div class="card-header bg-transparent border-0">
+                <h3 class="text-white mb-0">Projelerim</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-items-center table-dark table-flush">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" class="sort" data-sort="name">Proje</th>
+                            <th scope="col" class="sort" data-sort="budget">Ücret</th>
+                            <th scope="col" class="sort" data-sort="status">Durum</th>
+                            <th scope="col">Görseller</th>
+                            <th scope="col" class="sort" data-sort="completion">Tamamlanma Oranı</th>
+                            <th scope="col" class="sort" data-sort="name">Sil</th>
+                            <th scope="col" class="sort" data-sort="name">Düzenle</th>
+                        </tr>
+                    </thead>
+                    <tbody class="list">
+                        @foreach (var x in Model)
+                        {
+                            <tr>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <a href="#" class="avatar rounded-circle mr-3">
+                                            <img alt="Image placeholder" src="@x.Platform">
+                                        </a>
+                                        <div class="media-body">
+                                            <span class="name mb-0 text-sm">@x.Name</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="budget">
+                                    @x.Price₺
+                                </td>
+                                <td>
+                                    <span class="badge badge-dot mr-4">
+                                        <i class="bg-success"></i>
+                                        <span class="status">@x.Status</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="avatar-group">
+                                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip">
+                                            <img alt="Image placeholder" src="@x.Image1">
+                                        </a>
+                                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip">
+                                            <img alt="Image placeholder" src="@x.Image2">
+                                        </a>
+                                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip">
+                                            <img alt="Image placeholder" src="@x.Image3">
+                                        </a>
+                                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip">
+                                            <img alt="Image placeholder" src="@x.Image4">
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="completion mr-2">@x.Value%</span>
+                                        <div>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="@x.Value" aria-valuemin="0" aria-valuemax="100" style="width: @x.Value%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="budget">
+                                    <a href="/Portfolio/DeletePortfolio/@x.PortfolioId" class="btn btn-outline-danger">
+                                        Sil
+                                    </a>
+                                    
+                                </td>
+                                <td class="budget">
+                                    <a href="/Portfolio/EditPortfolio/@x.PortfolioId" class="btn btn-outline-primary">
+                                        Güncelle
+                                    </a>
+
+                                </td>
+                            </tr>  
+                        }
+                    </tbody>
+                </table>
+                <a href="/Portfolio/AddPortfolio" class="btn btn-outline-primary">Yeni Proje Girişi</a>
+            </div>
+        </div>
+    </div>
+</div>

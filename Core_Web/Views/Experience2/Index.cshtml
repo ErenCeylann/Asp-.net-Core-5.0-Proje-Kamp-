@@ -1,0 +1,188 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+<div class="col-md-6">
+    <div class="p-2">
+        <button type="button" id="getlistall" class="btn btn-outline-primary">Verileri Getir</button>
+        <button type="button" id="btnadd" class="btn btn-outline-info">Kaydet</button>
+        <button type="button" id="btnid" class="btn btn-outline-warning">Id'ye göre getir</button>
+        <button type="button" id="btndelete" class="btn btn-outline-danger">Sil</button>
+        <button type="button" id="btnupdate" class="btn btn-outline-success">Güncelle</button>
+    </div>
+</div>
+
+
+
+<div class="p-2" id="listexperience">
+</div>
+
+<br />
+<div class="p-2" id="listbyidexperience">
+</div>
+
+
+<div class="col-md-12">
+    <h5>Ekleme İşlemi</h5>
+    <input type="text" class="form-control" id="inpname" placeholder="Başlık" />
+    <br />
+    <input type="text" class="form-control" id="inpdate" placeholder="Date" />
+    <br />
+    <input type="text" class="form-control" id="inpurl" placeholder="Image Url" />
+    <br />
+    <input type="text" class="form-control" id="inpdesc" placeholder="Açıklama" />
+</div>
+
+<br />
+
+<div class="col-md-12">
+    <h5>Id'ye Göre Getirme İşlemi</h5>
+    <input type="text" class="form-control" id="inpid" placeholder="Id Giriniz" />
+
+</div>
+<br />
+<div class="col-md-12">
+    <h5>Silme İşlemi</h5>
+    <input type="text" class="form-control" id="inpdelete" placeholder="Silmek İstediğiniz verinin Id'yi Giriniz" />
+
+</div>
+<br />
+
+<div class="col-md-12" style="display:none" id="gün">
+    <h5>güncelleme İşlemi</h5>
+    <input type="text" class="form-control" id="inpname1" placeholder="Başlık" />
+    <br />
+    <input type="text" class="form-control" id="inpdate2" placeholder="Date" />
+    <br />
+    <input type="text" class="form-control" id="inpurl3" placeholder="Image Url" />
+    <br />
+    <input type="text" class="form-control" id="inpdesc4" placeholder="Açıklama" />
+    <br />
+    <button type="submit" class="btn btn-outline-success" id="btnupdate1" >Güncelle</button>
+</div>
+
+@section Scripts
+    {
+    <script>
+        $("#getlistall").click(function () {
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "Get",
+                url: "/Experience2/ListExperience",
+
+                success: function (funk) {
+                    let users = jQuery.parseJSON(funk);
+                    console.log(users);
+
+                    let htmlst = "<table class=table table-bordered> <tr> <th>ID</th> <th>Başlık</th> <th>Tarih</th> </tr>";
+                    $.each(users, (index, value) => {
+                        htmlst += `<tr> <td>${value.ExperinceId}</td> <td>${value.Name}</td> <td>${value.Date}</td> </tr>`
+                    });
+                    htmlst += "</table>";
+                    $("#listexperience").html(htmlst);
+                }
+            });
+        });
+
+        $("#btnadd").click(function () {
+            let values = {
+                Name: $("#inpname").val(),
+                Date: $("#inpdate").val(),
+                ImageUrl: $("#inpurl").val(),
+                Description: $("#inpdesc").val()
+            };
+
+            $.ajax({
+                type: "Post",
+                url: "/Experience2/AddExperience",
+                data: values,
+                success: function (funk1) {
+                    let result = jQuery.parseJSON(funk1);
+                    alert("Başarılı Bir Şekilde Eklendi");
+
+                }
+            });
+
+        });
+
+        $("#btnid").click(function () {
+            let id = $("#inpid").val();
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "Get",
+                url: "/Experience2/GetById",
+                data: { ExperinceId: id },
+                success: function (funk2) {
+                    console.log(funk2);
+                    let result = jQuery.parseJSON(funk2);
+                    let htmlstr = `<table class=table table-hover> <tr> <th>ID</th> <th>Başlık</th>  </tr> <tr> <td>${result.ExperinceId}</td> <td>${result.Name}</td> </tr> </table>`;
+                    $("#listbyidexperience").html(htmlstr);
+                }
+            });
+
+        });
+
+        $("#btndelete").click(function () {
+            let id = $("#inpdelete").val();
+            $.ajax({
+                contentType: "application/json",
+                url: "/Experience2/ExperienceDelete/"+id,
+                type:"post",
+                dataType:"json",
+                success: function (funk3) {
+                    alert("veri silindi!!!");
+                }
+            });
+        });
+
+        $("#btnupdate").click(function () {
+            let id = $("#inpid").val();
+            $("#gün").show();
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "Get",
+                url: "/Experience2/ExperienceUpdate",
+                data: { ExperinceId: id },
+                success: function (funk4) {
+                    console.log(funk4);
+                    let upda = jQuery.parseJSON(funk4);
+                    document.getElementById("inpname1").value = `${upda.Name}`;
+                    document.getElementById("inpdate2").value = `${upda.Date}`;
+                    document.getElementById("inpurl3").value = `${upda.ImageUrl}`;
+                    document.getElementById("inpdesc4").value = `${upda.Description}`;
+                }
+            });
+
+
+        });
+
+        $("#btnupdate1").click(function () {
+            let values = {
+                Name: $("#inpname1").val(),
+                Date: $("#inpdate2").val(),
+                ImageUrl: $("#inpurl3").val(),
+                Description: $("#inpdesc4").val()
+            };
+
+            $.ajax({
+                type: "Post",
+                url: "/Experience2/ExperienceUpdate",
+                data: values,
+                success: function (funk5) {
+                    let result = jQuery.parseJSON(funk5);
+                    $("#gün").hide();
+                    alert("Başarılı Bir Şekilde Güncellendi");
+
+                }
+            });
+
+        });
+    </script>
+}
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+

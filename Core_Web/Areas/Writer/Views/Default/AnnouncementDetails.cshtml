@@ -1,0 +1,14 @@
+﻿@model EntityLayer.Concrete.Announcement
+@{
+    ViewData["Title"] = "AnnouncementDetails";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">@Html.Label("Id"):@Html.TextBoxFor(x=>x.Id,new { disabled = "disabled" })</h5>
+        <h6 class="card-subtitle mb-2 text-muted">@Html.TextBoxFor(x=>x.Title,new { disabled = "disabled" })</h6>
+        <p class="card-text">@Html.TextAreaFor(x=>x.Content,13,30,new { disabled = "disabled" })</p>
+    </div>
+</div>
+

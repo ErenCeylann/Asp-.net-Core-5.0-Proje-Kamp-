@@ -1,0 +1,47 @@
+﻿@model EntityLayer.Concrete.About
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Index", "About", FormMethod.Post))
+{
+    @Html.HiddenFor(x=>x.AboutId)
+    ;
+    <div class="form-group">
+        @Html.LabelFor(Model=>Model.Title,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Title,new {@class="form-control"})
+
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.Description,new {@class="form-control"})
+        @Html.TextAreaFor(Model=>Model.Description,new {@class="form-control"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.Age,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Age,new {@class="form-control"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.Mail,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Mail,new {@class="form-control"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.Phone,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Phone,new {@class="form-control"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.Adress,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Adress,new {@class="form-control"})
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(Model=>Model.ImageUrl,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.ImageUrl,new {@class="form-control"})
+    </div>
+    <button class="btn btn-info">Güncelle</button>
+}

@@ -1,0 +1,21 @@
+﻿@model EntityLayer.Concrete.Skill
+@{
+    ViewData["Title"] = "AddSkill";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("AddSkill","Skill",FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(Model=>Model.Title,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Title,new {@class="form-control"})
+        
+    </div>
+    <div class="form-group">
+        
+        @Html.LabelFor(Model=>Model.Value,new {@class="form-control"})
+        @Html.TextBoxFor(Model=>Model.Value,new {@class="form-control"})
+    </div>
+    <button class="btn btn-primary">Ekle</button>
+}
+
